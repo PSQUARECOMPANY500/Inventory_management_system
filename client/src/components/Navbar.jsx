@@ -1,7 +1,12 @@
-import React from "react";
-import { AppBar, Toolbar, styled } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
+// importing important components from material-ui
+import { AppBar, Toolbar, styled } from "@mui/material";
+
+//  NavLink is used to navigate between different routes
+import { NavLink, useNavigate } from "react-router-dom";
+
+// Using Styled Components to style the AppBar, Toolbar, Buttons and Tabs
 const Home = styled(AppBar)({
   backgroundColor: "#fff",
   color: "rgb(0, 40, 132)",
@@ -27,8 +32,8 @@ const RightAlignedNavbars = styled(Navbars)({
 const Buttons = styled(NavLink)({
   margin: "0 10px",
   borderRadius: "4px",
-  textDecoration:"none",
-  color:"inherit",
+  textDecoration: "none",
+  color: "inherit",
   padding: "6px 30px",
   fontSize: "14px",
   border: "0.5px solid rgb(0, 40, 132)",
@@ -55,6 +60,21 @@ const Tabs = styled(NavLink)({
 });
 
 function Navbar() {
+  const navigate = useNavigate();
+  const [authorized, setAuthorized] = useState(false);
+  useEffect(() => {
+    if (!localStorage.getItem("auth")) {
+      navigate("/login");
+      return;
+    }
+    setAuthorized(true);
+  }, []);
+
+  const logoutHandler = () => {
+    localStorage.removeItem("auth");
+    setAuthorized(false);
+    navigate("/login");
+  };
   return (
     <Home position="static" elevation={0}>
       <Navbars>
@@ -65,8 +85,14 @@ function Navbar() {
         <Tabs to="/scan-qr-code">Scan QR Code</Tabs>
       </Navbars>
       <RightAlignedNavbars>
-        <Buttons to="/login">Login</Buttons>
-        <Buttons to="/register">Register</Buttons>
+        {authorized ? (
+          <Buttons onClick={logoutHandler}>Logout</Buttons>
+        ) : (
+          <>
+            <Buttons to="/login">Login</Buttons>
+            <Buttons to="/register">Register</Buttons>
+          </>
+        )}
       </RightAlignedNavbars>
     </Home>
   );

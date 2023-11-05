@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import GenerateQr from "./components/GenerateQr";
 import Homepage from "./components/Homepage";
+import EditData from "./components/EditData";
 
 // Importing react-router-dom to handle routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/generate-qr-code" element={<GenerateQr />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/edit/:id" element={<EditData />} />
       </Routes>
     </BrowserRouter>
   );
