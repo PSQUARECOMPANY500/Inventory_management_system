@@ -60,7 +60,6 @@ export const loginUser = async (req, res) => {
 export const saveQrData = async (req, res) => {
   const data = req.body;
   const newData = new Qrdata(data);
-
   try {
     await newData.save();
     res.status(201).json(newData);

@@ -132,7 +132,7 @@ function EditData() {
             name="receivedDate"
             type="date"
             required
-            defaultValue={moment(data?.receivedDate).format("YYYY-MM-DD")}
+            value={moment(data?.receivedDate).format("YYYY-MM-DD")}
             slotProps={{
               input: {
                 min: "2023-011-07T00:00",
@@ -140,7 +140,10 @@ function EditData() {
               },
             }}
             onChange={(e) =>
-              setData({ ...data, [e.target.name]: e.target.value })
+              setData({
+                ...data,
+                [e.target.name]: new Date(e.target.value).toISOString(),
+              })
             }
           />
         </CustomFormControl>

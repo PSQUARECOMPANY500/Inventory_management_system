@@ -60,7 +60,7 @@ const CustomFormControl = styled(FormControl)({
 
 const defaultvalue = {
   componentName: "1",
-  date: "",
+  receivedDate: "",
   quantity: "",
 };
 
@@ -72,7 +72,7 @@ function GenerateQr() {
     try {
       if (
         !data.componentName ||
-        !data.date ||
+        !data.receivedDate ||
         !data.quantity ||
         data.componentName === "1"
       ) {
@@ -120,7 +120,7 @@ function GenerateQr() {
           <FormLabel style={{ marginBottom: "10px" }}>Date</FormLabel>
           <InputForm
             // html input attribute
-            name="date"
+            name="receivedDate"
             type="date"
             required
             slotProps={{
@@ -130,7 +130,10 @@ function GenerateQr() {
               },
             }}
             onChange={(e) =>
-              setData({ ...data, [e.target.name]: e.target.value })
+              setData({
+                ...data,
+                [e.target.name]: new Date(e.target.value).toISOString(),
+              })
             }
           />
         </CustomFormControl>
