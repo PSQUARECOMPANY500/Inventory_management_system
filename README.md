@@ -1,6 +1,6 @@
 #URL of the webapp
 
-[https:](https://inventory-management-by-darkshadow.netlify.app/)
+[CLick here for url](https://inventory-management-by-darkshadow.netlify.app/)
 
 # Getting Started with Create React App
 
